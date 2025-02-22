@@ -2,7 +2,6 @@ import telebot
 from telebot import types
 import pandas as pd
 import json
-from queueRabbit import send_to_queue
 
 with open(r'Git_project\telegram_bot\create_cart_bot_telegram\bot_forwarder_telegram\config.json', 'r') as f:
     config = json.load(f)
@@ -37,7 +36,6 @@ def contact_seller(message):
 def order_registration(message):
     product = message.text
     order_data = {'product': product, 'user_id': user_id}
-    send_to_queue(order_data, 'orders_queue')
     try:
         df = pd.read_excel(r'C:\mylife\Git_project\telegram_bot\create_cart_bot_telegram\bot_forwarder_telegram\catalog.xlsx') # file path
     except Exception as e:
